@@ -1,0 +1,3 @@
+docker run -it --rm -v ${PWD}/scripts/build.sh:/home/happygobuilder/script.sh:ro -v /tmp/build-espressif_saola_1_wrover:/home/happygobuilder/circuitpython/ports/espressif/build-espressif_saola_1_wrover cpbuilder:0.1  bash ./script.sh espressif_saola_1_wrover
+
+docker run -it --rm -v ${PWD}/scripts/build.sh:/home/happygobuilder/script.sh:ro -v /tmp/build-brainboardz_neuron:/home/happygobuilder/circuitpython/ports/espressif/build-brainboardz_neuron -v ${PWD}/ports/espressif/boards/brainboardz_neuron:/home/happygobuilder/circuitpython/ports/espressif/boards/brainboardz_neuron:ro cpbuilder:0.1  bash ./script.sh brainboardz_neuron
