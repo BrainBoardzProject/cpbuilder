@@ -12,6 +12,7 @@ RUN apt update && apt install -y  \
     ninja-build \ 
     python3 \
     python3-pip \
+    python-is-python3 \
     && update-alternatives --install /usr/bin/python python /usr/bin/python3 10 \
     && python -m pip install --upgrade pip virtualenv \
     && rm -rf /var/lib/apt/lists/* 
@@ -25,9 +26,12 @@ ENV PATH="/home/happygobuilder/.local/bin:$PATH"
 ENV IDF_PATH="/home/happygobuilder/circuitpython/ports/espressif/esp-idf"
 
 RUN pip3 install click \
-    && git clone https://github.com/BrainBoardzProject/circuitpython.git \
+    && git clone https://github.com/adafruit/circuitpython.git \
     && cd circuitpython \ 
-    && git submodule update --init --recursive \ 
+    && git submodule sync --quiet --recursive \ 
+    && git submodule update --init \
+    && pip3 install -r requirements-dev.txt \
+    && make -C mpy-cross \
     && cd ports/espressif/esp-idf \
     && ./install.sh 
 
